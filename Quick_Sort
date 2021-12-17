@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace QuickSort
+{
+    class Program
+    {
+        private static void Swap(ref int a, ref int b)
+        {
+            int temp;
+            temp = a;
+            a = b;
+            b = temp;
+        }
+        private static int Partition(int[] arr, int low, int high)
+        {
+                int pivot = arr[high];
+                int j = low - 1;
+                for (int i = low; i <= high - 1; i++)
+                {
+                    if (arr[i] < pivot)
+                    {
+                        j++;
+                        Swap(ref arr[i], ref arr[j]);
+                    }
+                }
+                j++;
+                Swap(ref arr[j], ref pivot);
+                return j;
+            }
+       private static void Quick_sort(int[] arr, int low, int high)
+            {
+                int index = Partition(arr, low, high);
+                Quick_sort(arr, low, index - 1);
+                Quick_sort(arr, index + 1, high);
+            }
+      
+        public static void Main(string[]args)
+        {
+            int[] arr = new int[7]{10, 80, 30, 90, 40, 70, 50};
+            Quick_sort(arr, 0, arr.Length - 1);
+            Console.WriteLine("Sorted Values:");
+            for (int i = 0; i < arr.Length; i++)
+                Console.WriteLine(arr[i]);
+        }
+
+    }
+}
