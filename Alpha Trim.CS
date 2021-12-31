@@ -7,7 +7,7 @@
              int y;
              
             int[] Dx, Dy;
-            if (Wmax % 2 != 0)
+            if (neighborno % 2 != 0)
             {
                 Array = new byte[neighborno * neighborno];
                 Dx = new int[neighborno * neighborno];
