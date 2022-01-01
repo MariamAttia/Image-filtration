@@ -1,5 +1,5 @@
 
- public static byte Filter1(byte[,] ImageMatrix,)
+ public static byte AlphaTrim(int [] ImageMatrix)
         {
             byte[] Array;
             int neighborno;
