@@ -6,8 +6,8 @@ namespace QuickSort
     {
         static int Partition(int[] array, int low, int high)
         {
-            //1. Select a pivot point.
-            int pivot = array[high];
+           
+            int pivot = array[high]; 
 
             int lowIndex = (low - 1);
 
