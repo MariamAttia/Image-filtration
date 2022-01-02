@@ -1,47 +1,51 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-
 namespace QuickSort
 {
     class Program
     {
-        private static void Swap(ref int a, ref int b)
+        static int Partition(int[] array, int low, int high)
         {
-            int temp;
-            temp = a;
-            a = b;
-            b = temp;
-        }
-        private static int Partition(int[] arr, int low, int high)
-        {
-                int pivot = arr[high];
-                int j = low - 1;
-                for (int i = low; i <= high - 1; i++)
-                {
-                    if (arr[i] < pivot)
-                    {
-                        j++;
-                        Swap(ref arr[i], ref arr[j]);
-                    }
-                }
-                j++;
-                Swap(ref arr[j], ref pivot);
-                return j;
-            }
-       private static void Quick_sort(int[] arr, int low, int high)
+            //1. Select a pivot point.
+            int pivot = array[high];
+
+            int lowIndex = (low - 1);
+
+            for (int j = low; j < high; j++)
             {
-                int index = Partition(arr, low, high);
-                Quick_sort(arr, low, index - 1);
-                Quick_sort(arr, index + 1, high);
+                if (array[j] <= pivot)
+                {
+                    lowIndex++;
+
+                    int temp = array[lowIndex];
+                    array[lowIndex] = array[j];
+                    array[j] = temp;
+                }
             }
-      
-        public static void Main(string[]args)
+
+            int temp1 = array[lowIndex + 1];
+            array[lowIndex + 1] = array[high];
+            array[high] = temp1;
+
+            return lowIndex + 1;
+        }
+
+        static void Quick_sort(int[] array, int low, int high)
         {
-            int[] arr = new int[7]{10, 80, 30, 90, 40, 70, 50};
+            if (low < high)
+            {
+                int partitionIndex = Partition(array, low, high);
+
+                //3. Recursively continue sorting the array
+                Quick_sort(array, low, partitionIndex - 1);
+                Quick_sort(array, partitionIndex + 1, high);
+            }
+        }
+    
+
+        public static void Main(string[] args)
+        {
+            int[] arr = new int[7] { 10, 80, 30, 90, 40, 70, 50 };
             Quick_sort(arr, 0, arr.Length - 1);
             Console.WriteLine("Sorted Values:");
             for (int i = 0; i < arr.Length; i++)
